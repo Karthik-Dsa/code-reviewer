@@ -47,6 +47,8 @@
 
 ## 📦 Installation
 
+### Quick Start
+
 1. **Clone the repository**
 ```bash
 git clone https://github.com/Karthik-Dsa/code-reviewer.git
@@ -75,6 +77,10 @@ npm run dev
 
 5. **Open your browser**
 Navigate to [http://localhost:3000](http://localhost:3000)
+
+### Detailed Setup Guide
+
+For detailed setup instructions, including prerequisites, troubleshooting, and development tips, see [SETUP.md](./SETUP.md).
 
 ## 🎯 Usage
 
