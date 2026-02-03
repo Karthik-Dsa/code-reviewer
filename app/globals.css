@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-dark-side text-gray-100;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(74, 158, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(95, 211, 95, 0.1) 0%, transparent 50%);
+}
+
+.star-wars-text {
+  text-shadow: 0 0 10px rgba(74, 158, 255, 0.5);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0F0F23;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4A9EFF;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #88CCFF;
+}
