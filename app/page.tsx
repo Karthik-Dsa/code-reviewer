@@ -8,6 +8,7 @@ import CodeSmellAlert from '@/components/CodeSmellAlert';
 import RefactoringSuggestion from '@/components/RefactoringSuggestion';
 import LearningResourcesList from '@/components/LearningResourcesList';
 import CodeQualityScore from '@/components/CodeQualityScore';
+import styles from './page.module.css';
 
 export default function Home() {
   const [code, setCode] = useState('');
@@ -92,32 +93,32 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen">
+    <div>
       {/* Header */}
-      <header className="bg-gradient-to-r from-blue-900/50 to-green-900/50 border-b-2 border-jedi-blue py-6">
-        <div className="container mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-bold text-center star-wars-text animate-pulse-slow">
+      <header className={styles.header}>
+        <div className="container">
+          <h1 className={styles.title}>
             ⚔️ Jedi Code Council ⚔️
           </h1>
-          <p className="text-center text-gray-300 mt-2 text-lg">
+          <p className={styles.subtitle}>
             May the Force be with your code
           </p>
         </div>
       </header>
 
-      <div className="container mx-auto px-4 py-8 max-w-6xl">
+      <div className={styles.mainContainer}>
         {/* Code Input Section */}
-        <div className="bg-gradient-to-br from-blue-900/20 to-purple-900/20 border-2 border-jedi-blue rounded-lg p-6 mb-6">
+        <div className={styles.inputSection}>
           <form onSubmit={handleSubmit}>
-            <div className="mb-4">
-              <label htmlFor="language" className="block text-jedi-blue font-semibold mb-2">
+            <div className={styles.formGroup}>
+              <label htmlFor="language" className={styles.label}>
                 Select Language
               </label>
               <select
                 id="language"
                 value={language}
                 onChange={(e) => setLanguage(e.target.value as LanguageType)}
-                className="w-full md:w-64 px-4 py-2 bg-dark-side border border-jedi-blue rounded text-white focus:outline-none focus:ring-2 focus:ring-jedi-blue"
+                className={styles.select}
               >
                 <option value="javascript">JavaScript</option>
                 <option value="typescript">TypeScript</option>
@@ -126,8 +127,8 @@ export default function Home() {
               </select>
             </div>
 
-            <div className="mb-4">
-              <label htmlFor="code" className="block text-jedi-blue font-semibold mb-2">
+            <div className={styles.formGroup}>
+              <label htmlFor="code" className={styles.label}>
                 Paste Your Code
               </label>
               <textarea
@@ -135,16 +136,16 @@ export default function Home() {
                 value={code}
                 onChange={(e) => setCode(e.target.value)}
                 placeholder="// Paste your code here for review..."
-                className="w-full h-64 px-4 py-3 bg-dark-side border border-jedi-blue rounded text-white font-mono text-sm focus:outline-none focus:ring-2 focus:ring-jedi-blue resize-none"
+                className={styles.textarea}
                 disabled={isLoading}
               />
             </div>
 
-            <div className="flex gap-4">
+            <div className={styles.buttonGroup}>
               <button
                 type="submit"
                 disabled={isLoading || !code.trim()}
-                className="flex-1 bg-gradient-to-r from-jedi-blue to-jedi-green text-white font-bold py-3 px-6 rounded hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+                className={styles.submitButton}
               >
                 {isLoading ? '🔮 Consulting the Jedi Council...' : '⚔️ Review Code'}
               </button>
@@ -153,7 +154,7 @@ export default function Home() {
                 <button
                   type="button"
                   onClick={handleClearConversation}
-                  className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded transition-all duration-200"
+                  className={styles.clearButton}
                   disabled={isLoading}
                 >
                   🗑️ Clear
@@ -165,40 +166,35 @@ export default function Home() {
 
         {/* Conversation History */}
         {messages.length > 0 && (
-          <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-jedi-blue mb-4">
+          <div>
+            <h2 className={styles.conversationTitle}>
               📜 Council Proceedings
             </h2>
             {messages.map((message, index) => (
-              <div
-                key={index}
-                className={`rounded-lg p-6 ${
-                  message.role === 'user'
-                    ? 'bg-blue-900/20 border-l-4 border-jedi-blue'
-                    : 'bg-green-900/20 border-l-4 border-jedi-green'
-                }`}
-              >
-                <div className="flex items-center mb-3">
-                  <span className="text-2xl mr-2">
-                    {message.role === 'user' ? '👤' : '🧙‍♂️'}
-                  </span>
-                  <span className="font-bold text-lg">
-                    {message.role === 'user' ? 'You' : 'Jedi Master'}
-                  </span>
-                </div>
-                
-                <div className="text-gray-300 mb-4 whitespace-pre-wrap">
-                  {message.content}
-                </div>
-
-                {/* Render Dynamic Components */}
-                {message.components && message.components.length > 0 && (
-                  <div className="mt-4 space-y-4">
-                    {message.components.map((component, idx) =>
-                      renderComponent(component, idx)
-                    )}
+              <div key={index} className={styles.messageContainer}>
+                <div className={`${styles.message} ${message.role === 'user' ? styles.userMessage : styles.assistantMessage}`}>
+                  <div className={styles.messageHeader}>
+                    <span className={styles.messageIcon}>
+                      {message.role === 'user' ? '👤' : '🧙‍♂️'}
+                    </span>
+                    <span className={styles.messageSender}>
+                      {message.role === 'user' ? 'You' : 'Jedi Master'}
+                    </span>
                   </div>
-                )}
+                  
+                  <div className={styles.messageContent}>
+                    {message.content}
+                  </div>
+
+                  {/* Render Dynamic Components */}
+                  {message.components && message.components.length > 0 && (
+                    <div className={styles.componentsContainer}>
+                      {message.components.map((component, idx) =>
+                        renderComponent(component, idx)
+                      )}
+                    </div>
+                  )}
+                </div>
               </div>
             ))}
           </div>
@@ -206,9 +202,9 @@ export default function Home() {
 
         {/* Loading State */}
         {isLoading && (
-          <div className="text-center py-12">
-            <div className="inline-block animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-jedi-blue mb-4"></div>
-            <p className="text-xl text-jedi-blue font-semibold animate-pulse">
+          <div className={styles.loadingContainer}>
+            <div className={styles.spinner}></div>
+            <p className={styles.loadingText}>
               The Force is strong... Analyzing your code...
             </p>
           </div>
@@ -216,12 +212,12 @@ export default function Home() {
 
         {/* Empty State */}
         {messages.length === 0 && !isLoading && (
-          <div className="text-center py-12 bg-gradient-to-br from-blue-900/10 to-purple-900/10 rounded-lg border border-jedi-blue/30">
-            <div className="text-6xl mb-4">🧙‍♂️</div>
-            <h3 className="text-2xl font-bold text-jedi-blue mb-2">
+          <div className={styles.emptyState}>
+            <div className={styles.emptyIcon}>🧙‍♂️</div>
+            <h3 className={styles.emptyTitle}>
               Welcome, Young Padawan
             </h3>
-            <p className="text-gray-400">
+            <p className={styles.emptySubtitle}>
               Paste your code above and submit it for review by the Jedi Council
             </p>
           </div>
@@ -229,12 +225,12 @@ export default function Home() {
       </div>
 
       {/* Footer */}
-      <footer className="border-t-2 border-jedi-blue/30 mt-12 py-6 text-center text-gray-400">
-        <p className="italic">
+      <footer className={styles.footer}>
+        <p className={styles.footerQuote}>
           &quot;Fear is the path to the dark side. Fear leads to anger. Anger leads to hate. 
           Hate leads to suffering.&quot; - Master Yoda
         </p>
-        <p className="mt-2 text-sm">
+        <p className={styles.footerCredit}>
           Built for The UI Strikes Back Hackathon 🚀
         </p>
       </footer>

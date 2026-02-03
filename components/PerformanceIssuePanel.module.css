@@ -1,0 +1,77 @@
+.panel {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 2px solid var(--jedi-blue);
+  background-color: rgba(30, 58, 138, 0.2);
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: var(--jedi-blue);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.issuesList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.issueCard {
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.issueHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.issueType {
+  color: #fbbf24;
+  font-weight: 600;
+}
+
+.issueLocation {
+  font-size: 0.875rem;
+  color: #9ca3af;
+}
+
+.impactLabel {
+  color: #f87171;
+  font-size: 0.875rem;
+  margin-right: 0.5rem;
+}
+
+.impactText {
+  color: var(--text-gray);
+  font-size: 0.875rem;
+}
+
+.suggestionSection {
+  border-top: 1px solid #374151;
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.suggestionLabel {
+  color: var(--jedi-green);
+  font-weight: 600;
+  font-size: 0.875rem;
+  margin-right: 0.5rem;
+}
+
+.suggestionText {
+  color: var(--text-gray);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  display: block;
+}

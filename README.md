@@ -14,6 +14,19 @@
 
 **Jedi Code Council** is an AI-powered code review application built for **The UI Strikes Back** hackathon. It uses Groq's Llama 3.1 70B model to analyze code and dynamically render UI components based on detected issues, using Star Wars theming throughout.
 
+> **Note**: The original specification mentioned Tambo SDK (`@tamboai/react`), but since this package is not publicly available, we've implemented a robust alternative using Groq's JSON mode and React's dynamic component system. See [IMPLEMENTATION.md](./IMPLEMENTATION.md) for details.
+
+## 📸 Screenshots
+
+### Main Interface
+![Jedi Code Council Home](https://github.com/user-attachments/assets/413d9039-4c64-4784-8fd3-89c4346eeee6)
+
+### Code Input Example
+![Code Input](https://github.com/user-attachments/assets/2c3ca55f-8ba0-4cb3-a169-52c588644478)
+
+### Custom CSS Design (No Tailwind)
+![CSS-based Design](https://github.com/user-attachments/assets/6a4171f6-19bf-40f6-afa8-37a9e05901ba)
+
 ### ✨ Key Features
 
 - 🔍 **Intelligent Code Analysis**: Detects security vulnerabilities, performance issues, and code smells
@@ -28,7 +41,7 @@
 
 - **Frontend**: React 18+ with Next.js 14 App Router
 - **AI**: Groq API with Llama 3.1 70B Versatile
-- **Styling**: Tailwind CSS with custom Star Wars theme
+- **Styling**: Custom CSS with CSS Modules (no external CSS frameworks)
 - **Language**: TypeScript
 - **Deployment**: Vercel-ready
 

@@ -1,11 +1,18 @@
 import React from 'react';
 import { CodeQualityScore as CodeQualityScoreType } from '@/types';
+import styles from './CodeQualityScore.module.css';
 
 const CodeQualityScore: React.FC<CodeQualityScoreType> = ({ score, metrics }) => {
-  const getScoreColor = (value: number) => {
-    if (value >= 80) return 'text-jedi-green';
-    if (value >= 60) return 'text-yellow-400';
-    return 'text-red-400';
+  const getScoreColorClass = (value: number) => {
+    if (value >= 80) return styles.colorGreen;
+    if (value >= 60) return styles.colorYellow;
+    return styles.colorRed;
+  };
+
+  const getBarClass = (value: number) => {
+    if (value >= 80) return styles.highScore;
+    if (value >= 60) return styles.mediumScore;
+    return styles.lowScore;
   };
 
   const getScoreMessage = (score: number) => {
@@ -17,20 +24,14 @@ const CodeQualityScore: React.FC<CodeQualityScoreType> = ({ score, metrics }) =>
   };
 
   const MetricBar = ({ label, value }: { label: string; value: number }) => (
-    <div className="mb-3">
-      <div className="flex justify-between mb-1">
-        <span className="text-gray-300 text-sm">{label}</span>
-        <span className={`text-sm font-bold ${getScoreColor(value)}`}>{value}/100</span>
+    <div className={styles.metricBar}>
+      <div className={styles.metricHeader}>
+        <span className={styles.metricLabel}>{label}</span>
+        <span className={`${styles.metricValue} ${getScoreColorClass(value)}`}>{value}/100</span>
       </div>
-      <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
+      <div className={styles.barContainer}>
         <div
-          className={`h-full transition-all duration-500 ${
-            value >= 80
-              ? 'bg-gradient-to-r from-jedi-green to-green-400'
-              : value >= 60
-              ? 'bg-gradient-to-r from-yellow-500 to-yellow-300'
-              : 'bg-gradient-to-r from-red-600 to-red-400'
-          }`}
+          className={`${styles.barFill} ${getBarClass(value)}`}
           style={{ width: `${value}%` }}
         />
       </div>
@@ -38,28 +39,28 @@ const CodeQualityScore: React.FC<CodeQualityScoreType> = ({ score, metrics }) =>
   );
 
   return (
-    <div className="p-6 rounded-lg border-2 border-force-glow bg-blue-900/30 mb-4 animate-glow">
-      <h3 className="text-2xl font-bold text-center mb-4 text-force-glow">
+    <div className={styles.scoreCard}>
+      <h3 className={styles.title}>
         ⭐ Force Sensitivity Analysis ⭐
       </h3>
       
-      <div className="text-center mb-6">
-        <div className={`text-6xl font-bold mb-2 ${getScoreColor(score)}`}>
+      <div className={styles.scoreDisplay}>
+        <div className={`${styles.scoreValue} ${getScoreColorClass(score)}`}>
           {score}
-          <span className="text-3xl">/100</span>
+          <span className={styles.scoreUnit}>/100</span>
         </div>
-        <p className="text-xl text-gray-300">{getScoreMessage(score)}</p>
+        <p className={styles.scoreMessage}>{getScoreMessage(score)}</p>
       </div>
 
-      <div className="border-t border-gray-700 pt-4">
-        <h4 className="text-lg font-semibold text-jedi-blue mb-3">Detailed Metrics</h4>
+      <div className={styles.metricsSection}>
+        <h4 className={styles.metricsTitle}>Detailed Metrics</h4>
         <MetricBar label="🛡️ Security" value={metrics.security} />
         <MetricBar label="⚡ Performance" value={metrics.performance} />
         <MetricBar label="🔧 Maintainability" value={metrics.maintainability} />
       </div>
 
-      <div className="mt-4 text-center text-sm text-gray-400 italic">
-        "Do or do not. There is no try." - Master Yoda
+      <div className={styles.quote}>
+        &quot;Do or do not. There is no try.&quot; - Master Yoda
       </div>
     </div>
   );

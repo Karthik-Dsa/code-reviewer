@@ -1,5 +1,6 @@
 import React from 'react';
 import { LearningResource } from '@/types';
+import styles from './LearningResourcesList.module.css';
 
 interface LearningResourcesListProps {
   resources: LearningResource[];
@@ -15,28 +16,28 @@ const LearningResourcesList: React.FC<LearningResourcesListProps> = ({ resources
   };
 
   return (
-    <div className="p-4 rounded-lg border-2 border-purple-500 bg-purple-900/20 mb-4">
-      <h3 className="text-xl font-bold text-purple-400 mb-4 flex items-center">
+    <div className={styles.resourcesList}>
+      <h3 className={styles.title}>
         📖 Jedi Archives - Learn More
       </h3>
-      <div className="space-y-2">
+      <div className={styles.resources}>
         {resources.map((resource, index) => (
           <a
             key={index}
             href={resource.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="block bg-black/40 p-3 rounded border border-purple-500/30 hover:border-purple-400 hover:bg-purple-900/30 transition-all duration-200"
+            className={styles.resourceLink}
           >
-            <div className="flex items-start">
-              <span className="text-2xl mr-3">
+            <div className={styles.resourceContent}>
+              <span className={styles.resourceIcon}>
                 {typeIcons[resource.type.toLowerCase()] || typeIcons.default}
               </span>
-              <div className="flex-1">
-                <div className="text-white font-semibold mb-1">{resource.title}</div>
-                <div className="text-sm text-gray-400 capitalize">{resource.type}</div>
+              <div className={styles.resourceInfo}>
+                <div className={styles.resourceTitle}>{resource.title}</div>
+                <div className={styles.resourceType}>{resource.type}</div>
               </div>
-              <span className="text-purple-400">→</span>
+              <span className={styles.resourceArrow}>→</span>
             </div>
           </a>
         ))}
